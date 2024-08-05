@@ -6,4 +6,9 @@ class AdditionServiceTest < ActiveSupport::TestCase
     sum = AdditionService.new("1,2").process
     assert_equal 3, sum
   end
+
+  def test_should_return_zero_if_input_string_is_empty
+    sum = AdditionService.new("").process
+    assert_equal 0, sum
+  end
 end
