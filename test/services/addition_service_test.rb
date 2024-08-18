@@ -29,4 +29,9 @@ class AdditionServiceTest < ActiveSupport::TestCase
     error_message = 'negative numbers not allowed -2, -4'
     assert_equal error_message, error.message
   end
+
+  def test_ignore_numbers_greater_than_thousand
+    sum = AdditionService.new("//;\n1;2;1002").process
+    assert_equal 3, sum
+  end
 end
