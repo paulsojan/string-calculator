@@ -30,9 +30,9 @@ class AdditionService
     end
 
     def extract_custom_delimiter
-      new_input = input.split("\n", 2)
-      delimiter = new_input[0][2..]
-      [new_input[1], delimiter]
+      delimiter_part, numbers_part = input.split("\n", 2)
+      delimiter = delimiter_part.start_with?('//[') ? delimiter_part.scan(/\[(.*?)\]/).flatten.join : delimiter_part[2..]
+      [numbers_part, delimiter]
     end
 
     def normalized_numbers(string, delimiter)
