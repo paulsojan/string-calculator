@@ -40,7 +40,7 @@ class AdditionServiceTest < ActiveSupport::TestCase
     assert_equal 7, sum
   end
 
-  def test_should_allow_multiple_delimiter
+  def test_should_allow_multiple_delimiters
     sum = AdditionService.new("//[*][%]\n1*2%3").process
     assert_equal 6, sum
   end

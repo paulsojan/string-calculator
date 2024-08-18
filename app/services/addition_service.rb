@@ -14,7 +14,7 @@ class AdditionService
   private
 
     def compute_sum
-      numbers_array = normalize_delimiters.split.map(&:to_i)
+      numbers_array = normalize_delimiters.map(&:to_i)
       check_for_negative_numbers(numbers_array)
 
       valid_numbers = numbers_array.select { |num| num < 1000 }
@@ -31,12 +31,12 @@ class AdditionService
 
     def extract_custom_delimiter
       delimiter_part, numbers_part = input.split("\n", 2)
-      delimiter = delimiter_part.start_with?('//[') ? delimiter_part.scan(/\[(.*?)\]/).flatten.join : delimiter_part[2..]
-      [numbers_part, delimiter]
+      delimiters = delimiter_part.start_with?('//[') ? delimiter_part.scan(/\[(.*?)\]/).flatten : delimiter_part[2..]
+      [numbers_part, delimiters]
     end
 
-    def normalized_numbers(string, delimiter)
-      string.gsub(delimiter, ' ')
+    def normalized_numbers(string, delimiters)
+      string.split(Regexp.union(delimiters))
     end
 
     def check_for_negative_numbers(numbers)
