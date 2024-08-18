@@ -16,6 +16,6 @@ class CalculationsControllerTest < ActionDispatch::IntegrationTest
     assert_response :unprocessable_entity
 
     response_json = @response.parsed_body
-    assert_equal "negative numbers not allowed -1, -4", response_json['message']
+    assert_equal "negative numbers not allowed -1, -4", response_json['error']
   end
 end
