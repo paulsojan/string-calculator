@@ -14,11 +14,29 @@ class AdditionService
   private
 
     def compute_sum
-      numbers_array = normalized_numbers.split.map(&:to_i)
+      numbers_array = normalize_delimiters.split.map(&:to_i)
       numbers_array.sum
     end
 
-    def normalized_numbers
-      input.gsub(/[,|\n]/, ' ')
+    def normalize_delimiters
+      if input.start_with?('//')
+        string, delimiter = extract_custom_delimiter
+        return normalized_numbers(string, delimiter)
+      end
+      normalized_numbers(input, default_delimiter)
+    end
+
+    def extract_custom_delimiter
+      new_input = input.split("\n", 2)
+      delimiter = new_input[0][2..]
+      [new_input[1], delimiter]
+    end
+
+    def normalized_numbers(string, delimiter)
+      string.gsub(delimiter, ' ')
+    end
+
+    def default_delimiter
+      /[,|\n]/
     end
 end
