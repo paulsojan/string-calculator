@@ -1,24 +1,41 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Local Development
 
-Things you may want to cover:
+Install dependencies
 
-* Ruby version
+```
+bundle install
+```
 
-* System dependencies
+Start the server by executing the following command.
 
-* Configuration
+```
+bundle exec rails server -p 3000
+```
 
-* Database creation
+## API Documentation
 
-* Database initialization
+### Calculations
 
-* How to run the test suite
+| Endpoint          | Method | Description        |
+| ----------------- | ------ | ------------------ |
+| /api/calculations | POST   | Calculates the sum |
 
-* Services (job queues, cache servers, search engines, etc.)
+**Request:**
 
-* Deployment instructions
+```json
+{
+  "calculation": {
+    "input": "//[***][%]\n1***2***4%1"
+  }
+}
+```
 
-* ...
+**Response:**
+
+```json
+{
+  "sum": 8
+}
+```
